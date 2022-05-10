@@ -1,4 +1,7 @@
 <template>
+    dashboard
+
+
 
 </template>
 
