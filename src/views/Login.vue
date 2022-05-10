@@ -30,7 +30,7 @@
         </template>
         <div class="w-full flex flex-col w-full mt-5">
           <button
-            @click.prevent="check"
+            @click.prevent="loginTo"
             class="hover:bg-[#f7d1cd] hover:ring-4 active:ring-[#d1b3c4] w-full bg-[#f7d1cd] rounded py-1 text-lg font-sans text-gray-600 ring-2 ring-[#f7d1cd]">connexion</button>
         </div>
       </form>
@@ -54,7 +54,9 @@ const password = ref("");
 
 const router = useRouter();
 
-const check = () => router.push("/dashboard");
+const loginTo = () => {
+  tenant.value === 'student' ? router.push("/student") : router.push("/teacher");
+}
 const shouldCloseTenantOptions = ref(true);
 
 const handleClose = () => {

@@ -1,8 +1,5 @@
 <template>
-    dashboard
-
-
-
+  welcome to student page
 </template>
 
 <script setup>
