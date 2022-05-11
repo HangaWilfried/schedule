@@ -26,7 +26,7 @@
         </template>
         <template v-else>
           <Field label="full name" v-model:field="fullName" model="text"/>
-          <Field label="password" v-model:field="password" model="password"/>
+          <Field label="registration number" v-model:field="registrationNumber" model="text"/>
         </template>
         <div class="w-full flex flex-col w-full mt-5">
           <button
@@ -50,7 +50,7 @@ const tenant = ref("student");
 const Faculty = ref("");
 const level = ref("");
 const fullName = ref("");
-const password = ref("");
+const registrationNumber = ref("");
 
 const router = useRouter();
 
