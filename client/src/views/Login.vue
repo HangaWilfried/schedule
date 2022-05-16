@@ -46,9 +46,15 @@ import { useRouter } from "vue-router";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 
+import { useStudentStore, useTeacherStore } from "@/store/login";
 
 import Field from "../components/Field.vue";
-import { ChevronDownIcon } from '@heroicons/vue/solid'
+import { ChevronDownIcon } from '@heroicons/vue/solid';
+ import axios from "axios";
+
+
+const studentStore = useStudentStore();
+const teacherStore = useTeacherStore();
 
 const student = reactive({
   faculty: "",
@@ -85,8 +91,17 @@ const v$ = useVuelidate(computedRule, computedState);
 
 const router = useRouter();
 
-const loginTo = () => {
-  tenant.value === 'student' ? router.push("/student") : router.push("/teacher");
+const loginTo = async () => {
+  if(tenant.value === 'student') {
+    studentStore.setData(student.level, student.faculty);
+    await axios.post(`http://localhost:5000/student?faculty=${studentStore.fillFaculty}&level=${studentStore.fillLevel}`);
+    router.push("/student");
+  }
+  else {
+    teacherStore.setData(teacher.fullName, teacher.registrationNumber);
+    await axios.post(`http://localhost:5000/teacher?fullName=${teacherStore.fillName}&registrationNumber=${teacherStore.fillRegister}`);
+    router.push("/teacher");
+  }
 }
 const shouldCloseTenantOptions = ref(true);
 
