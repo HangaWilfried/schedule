@@ -10,7 +10,6 @@
     <div class="w-full flex border">
       <div class="border-l px-10 grid grid-cols-4 w-full gap-8 py-14">
         <Lesson v-for="(data, index) in datas" :key="index" :data="data" />
-        <router-view></router-view>
       </div>
     </div>
     <div class="w-full pb-20 px-4 pt-4 space-x-2">
@@ -24,7 +23,11 @@ import Lesson from "../components/Lesson.vue"
 import { useStudentStore } from "@/store/login";
 
 import axios from "axios";
+import { reactive } from "vue";
 
-const datas = axios.get("http://localhost:5000/student")
+const datas = reactive([]);
+
+axios.get("http://localhost:5500/student").then((resolve) => datas.push(...resolve.data));
+
 const store = useStudentStore();
 </script>

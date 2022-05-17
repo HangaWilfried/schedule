@@ -94,12 +94,12 @@ const router = useRouter();
 const loginTo = async () => {
   if(tenant.value === 'student') {
     studentStore.setData(student.level, student.faculty);
-    await axios.post(`http://localhost:5000/student?faculty=${studentStore.fillFaculty}&level=${studentStore.fillLevel}`);
+    await axios.post(`http://localhost:5500/student?faculty=${studentStore.fillFaculty}&level=${studentStore.fillLevel}`);
     router.push("/student");
   }
   else {
     teacherStore.setData(teacher.fullName, teacher.registrationNumber);
-    await axios.post(`http://localhost:5000/teacher?fullName=${teacherStore.fillName}&registrationNumber=${teacherStore.fillRegister}`);
+    await axios.post(`http://localhost:5500/teacher?fullName=${teacherStore.fillName}&registrationNumber=${teacherStore.fillRegister}`);
     router.push("/teacher");
   }
 }
