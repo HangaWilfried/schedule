@@ -14,24 +14,33 @@
         <button class="bg-orange-100 rounded-md px-2 py-1">licence 3</button>
       </div>
       <div class="border-l px-10 grid grid-cols-4 w-full gap-8 py-14">
-        <Lesson v-for="(data, index) in datas" :key="index" />
+        <div v-for="(data, index) in datas" :key="index" class="p-4 border-t border-gray-100 shadow-md rounded flex flex-col divide-y-2 text-gray-700">
+          <div class="flex justify-between">
+            <span>{{data.intitule}}</span>
+            <span>{{data.jour}}</span>
+          </div>
+          <div class="flex divide-x-2">
+            <span class="p-4">{{`${data.debut} - ${data.fin}`}}</span>
+            <span class="p-4">{{`${data.nomEnseignant} - ${data.nomSalle}`}}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="w-full pb-20 px-4 pt-4 space-x-2">
       <span>teacher:</span>
-      <span class="text-sm font-medium uppercase">DR NDJE.</span>
+      <span class="text-sm font-medium uppercase">{{store.fillName}}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
-import Lesson from "../components/Lesson.vue"
+import { useTeacherStore } from "@/store/login";
 
 import axios from "axios";
 import { reactive } from "vue";
 
 const datas = reactive([]);
+const store = useTeacherStore();
 
 axios.get("http://localhost:5500/teacher").then((resolve) => datas.push(...resolve.data));
 </script>
